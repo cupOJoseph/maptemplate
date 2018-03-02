@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>map template</title>
+  </head>
+  <body>
+
+
+      <div id="map" heigh="100%" width="100%">
+
+      </div>
+
+      <script type="text/javascript">
+      //Mapbox functions
+      mapboxgl.accessToken = 'pk.eyJ1Ijoic2NoaWFyaXp6aSIsImEiOiJjajE4a3NuZWowNzQ5MzNvN2xkdGh2YnVwIn0.dOZQgGCs8Fwxpy7bmRvvTg';
+      var map = new mapboxgl.Map({
+          container: 'map', // container id
+          style: 'mapbox://styles/schiarizzi/cje3ka2m25q0w2rl70bd32303', // stylesheet location
+          center: [-77.036871, 38.907192], // starting position [lng, lat]
+          zoom: 11 // starting zoom
+      });
+
+      // disable map zoom when using scroll
+      map.scrollZoom.disable();
+
+      map.on('load', function () {
+        map.addLayer({
+          "id": "points",
+          "type": "symbol",
+          "source": {
+              "type": "geojson",
+              "data": {
+                  "type": "FeatureCollection",
+                  "features": [{
+                      "type": "Feature",
+                      "geometry": {
+                          "type": "Point",
+                          "coordinates": [-77.089795, 38.917649] //ames hall lon lat
+                      },
+                      "properties": {
+                          "title": "Hackital Ethereum",
+                          "icon": "castle"
+                      }
+                  }]
+              }
+          },
+          "layout": {
+              "icon-image": "{icon}-15",
+              "text-field": "{title}",
+              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+              "text-offset": [0, 0.6],
+              "text-anchor": "top"
+          },
+          "paint":{
+            "text-color":"rgba(255, 255, 255, 255)"
+          }
+      });
+
+  });
+      </script>
+  </body>
+</html>
